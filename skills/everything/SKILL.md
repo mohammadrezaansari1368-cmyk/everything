@@ -1,42 +1,55 @@
 ---
 name: everything
-description: "ONE all-in-one command. Use `everything <task>` for any coding, design, or agent task: runs the whole workflow end to end (understand -> brainstorm -> plan -> build with TDD -> UI -> debug -> review -> verify -> ship) and automatically invokes each bundled skill whenever its trigger fires during the task. The user never needs to call another skill."
+description: "ONE command: `everything <task>`. N3S orchestrator (Need, Navigate, Narrow, Solve) for any coding/design/agent task. Keeps a compact skill index and loads a skill's full SKILL.md only when the current step needs it. Full spec: docs/N3S.md."
 ---
 
-# everything — continuous all-in-one orchestrator
+# everything — N3S orchestrator
 
-The user types only `everything <task>`. You own the whole task end to end. This is not a one-time picker: keep re-checking the triggers below at every step and load the matching skill the moment its trigger fires (load by name; if missing, use the listed fallback and say so).
+Core: **Maximum Capability ≠ Maximum Context.** Load less, retrieve better, use the right skill, verify, keep only what matters. Never invoke a skill merely because it exists.
 
-## Always-on rules (whole session)
-- **karpathy-guidelines**: think before coding, simplest solution, surgical changes, verifiable goals.
-- **graphify**: whenever you need to understand code structure or `graphify-out/` exists, query the graph before reading files broadly.
-- **caveman**: terse output by default; drop it if user asks for detail. Use `caveman-commit` for commit messages.
-- **verification-before-completion**: never claim done without running the check.
-- **context-engineering**: keep context lean; summarize large reads.
+## N1 — Need (before loading anything)
+Classify: outcome · current problem · domain/system · autonomy level · constraints · missing info · risk. Ask only if missing info blocks a correct action. Load no skill until classified.
 
-## Stage pipeline
-Run stages in order; skip a stage only when it clearly doesn't apply, and state the skip in one line. Jump back to an earlier stage when its trigger fires again.
+## N2 — Navigate
+Pick the fewest skills (usually 1) from the INDEX for the *current step*. Load its full SKILL.md only now. When the step/problem changes, drop that skill's detail and route again.
 
-| # | Stage | Trigger | Skills (primary -> fallback) |
-|---|---|---|---|
-| 1 | Understand | always first | graphify, investigate-first, caveman-explore, source-driven-development |
-| 2 | Brainstorm | goal vague, new feature, design choice | brainstorming -> idea-refine, interview-me |
-| 3 | Plan | >1 step or >1 file | writing-plans -> spec-driven-development, planning-and-task-breakdown, constraint-driven-development |
-| 4 | Isolate | code changes in a repo | using-git-worktrees, git-workflow-and-versioning |
-| 5 | Build | implementing | test-driven-development (addy-test-driven-development), incremental-implementation, surgical-patch; parallelizable tasks -> subagent-driven-development / dispatching-parallel-agents / cavecrew; existing plan -> executing-plans |
-| 6 | UI | any UI/frontend/design work | ui-ux-pro-max -> frontend-design -> frontend-ui-engineering; artifacts -> web-artifacts-builder |
-| 7 | Specialized | as matched | MCP server -> mcp-builder; Claude API -> claude-api; API design -> api-and-interface-design; new skill -> skill-creator / writing-skills; refactor -> code-simplification, safe-refactor; migration -> deprecation-and-migration, migration; perf -> performance-optimization; security -> security-and-hardening; logging/metrics -> observability-and-instrumentation |
-| 8 | Debug | any failure, error, unexpected result | systematic-debugging -> debugging-and-error-recovery; then back to stage 5 |
-| 9 | Test in browser | web app behavior | webapp-testing, browser-testing-with-devtools |
-| 10 | Review | after each meaningful chunk | requesting-code-review, code-review-and-quality, caveman-review, doubt-driven-development; on feedback -> receiving-code-review |
-| 11 | Verify | before any "done" | verification-before-completion, verify-and-stop |
-| 12 | Ship | work complete | finishing-a-development-branch, documentation-and-adrs, ci-cd-and-automation, shipping-and-launch |
+## N3 — Narrow
+repo → module → files → symbols → lines. Search / index / graph (graphify if `graphify-out/` exists or structure is unknown) / summaries before opening large files. Reuse verified facts; don't rediscover.
 
-## Loop
-1. Announce the planned stages in one line.
-2. Execute; at each step re-evaluate triggers (errors -> stage 8, UI appears -> stage 6, scope grows -> stage 3).
-3. Finish with a short report: what changed, checks run, skills used.
+## S — Solve loop
+Understand → Select Skill → Retrieve Minimum Context → Act → Verify → Continue / Switch. Done only when the outcome is verified.
 
-Overlaps: superpowers versions are primary; addyosmani/caveman equivalents are fallbacks (see repo README).
+## Context budget (per item)
+Required now? No → don't load. Yes → can search/summarize first? Yes → smallest section; No → load source.
 
-"n3s method": pending definition from the owner; pipeline is generic until defined.
+## Working state (compress after each completed step)
+```
+Goal | Known Facts | Current Hypothesis | Files Involved | Changes Made | Verification Status | Next Action
+```
+Keep decisions and evidence, not intermediate thoughts.
+
+## Protocol
+01 understand outcome · 02 classify · 03 minimum skill · 04 search before reading · 05 load only relevant · 06 smallest useful action · 07 verify · 08 record reusable findings · 09 compress · 10 next skill only if required · 11 repeat until verified.
+
+## Lightweight defaults (do NOT load these skills wholesale)
+- Think before coding; simplest solution; surgical diffs; verifiable goal (karpathy).
+- Terse output unless detail requested (caveman).
+- No "done" without a passing check.
+
+## Skill INDEX (name — load when…)
+Paths: `skills/<source>/<name>/SKILL.md` (locally: `~/.claude/skills/<name>`). Prefer the first listed; others are fallbacks.
+
+**Need/ideas:** brainstorming — vague goal or design choice · idea-refine, interview-me — requirements unclear
+**Plan:** writing-plans — multi-step work · spec-driven-development — needs a spec · planning-and-task-breakdown — large scope · executing-plans — plan exists · constraint-driven-development — hard constraints
+**Navigate code:** graphify — unknown structure/behavior, reverse engineering · investigate-first, caveman-explore — explore before change · source-driven-development — must cite source/docs · context-engineering — context getting large
+**Build:** test-driven-development (alt addy-test-driven-development) — writing code with testable behavior · incremental-implementation, surgical-patch — small change · subagent-driven-development, dispatching-parallel-agents, cavecrew — independent parallel tasks · using-git-worktrees — isolate branch work
+**UI:** ui-ux-pro-max — any UI/UX decision · frontend-design — visual polish · frontend-ui-engineering — component code · web-artifacts-builder — single-file web artifact
+**Debug:** systematic-debugging — any failure/unexpected result · debugging-and-error-recovery — recovery steps
+**Test:** webapp-testing — drive web app with Playwright · browser-testing-with-devtools — DevTools inspection
+**Security/DB/perf:** security-and-hardening — auth, secrets, input handling · performance-optimization — slow paths, DB queries · observability-and-instrumentation — logs/metrics/tracing
+**APIs/tools:** api-and-interface-design — API shape · mcp-builder — MCP server · claude-api — Claude API app · skill-creator, writing-skills — authoring skills
+**Refactor/migrate:** code-simplification, safe-refactor — refactor · deprecation-and-migration, migration — migrations
+**Review:** requesting-code-review — after a meaningful chunk · receiving-code-review — handling feedback · code-review-and-quality, caveman-review, doubt-driven-development — extra scrutiny
+**Verify:** verification-before-completion, verify-and-stop — before claiming done
+**Git/DevOps/ship:** git-workflow-and-versioning, caveman-commit — git ops · ci-cd-and-automation — CI/deploy failure · finishing-a-development-branch — wrap up branch · shipping-and-launch — release · documentation-and-adrs — docs/decisions
+**Terse modes:** caveman (+ ultracave/megacave) — user wants minimal tokens · caveman-compress — compress a file

@@ -3,11 +3,13 @@
 یک مخزن واحد که همه‌ی اسکیل‌ها را ادغام می‌کند و با **یک دستور** اجرا می‌شود: `everything <task>`.
 A single repo merging all agent skills, driven by **one command**: `everything <task>`.
 
-## How it works / نحوه کار
-- `skills/everything/SKILL.md` + `commands/everything.md`: ارکستریتور پیوسته — کل جریان (درک → ایده‌پردازی → برنامه → ساخت با TDD → UI → دیباگ → بازبینی → تأیید → انتشار) را اجرا و هر اسکیل را در زمان لازم به‌طور خودکار فراخوانی می‌کند. / Continuous orchestrator that runs the full pipeline and auto-invokes each skill when its trigger fires. Always-on: karpathy-guidelines, graphify, caveman, verification.
-- Install: copy `skills/<source>/<skill>` into `~/.claude/skills/` (or `~/.codex/skills/`), and `commands/everything.md` into `~/.claude/commands/`.
+## How it works / نحوه کار — N3S
+- فقط یک دستور: `everything <task>`. این دستور ارکستریتور **N3S** (Need، Navigate، Narrow، Solve) است: اول نیاز را دسته‌بندی می‌کند، فقط کمترین اسکیل لازم برای همان مرحله را بارگذاری می‌کند، کانتکست را باریک می‌کند و تا تأیید نتیجه ادامه می‌دهد. هیچ اسکیلی به‌صورت سراسری بارگذاری نمی‌شود.
+- One command: `everything <task>`. It is an **N3S** orchestrator (Need, Navigate, Narrow, Solve): classify the need, load only the minimum skill for the current step (full SKILL.md just-in-time from a compact index), narrow context, solve and verify. No skill is loaded globally; karpathy/caveman are lightweight defaults only. Target ~70% less context (a target, not a guarantee).
+- Full spec / مشخصات کامل: [docs/N3S.md](docs/N3S.md)
+- Files: `skills/everything/SKILL.md`, `commands/everything.md`.
+- Install: copy `skills/<source>/<skill>` into `~/.claude/skills/` (or `~/.codex/skills/`), and `commands/everything.md` into `~/.claude/commands/` (Codex: `~/.codex/prompts/`).
 - Layout: `skills/<source>/<skill>/`; each source folder keeps upstream LICENSE/NOTICE.
-- **n3s method**: pending — definition awaited from owner; structure is generic for now. / روش n3s: در انتظار تعریف.
 
 ## Overlaps (kept, not deleted) / هم‌پوشانی‌ها
 | Topic | Primary (superpowers) | Also |

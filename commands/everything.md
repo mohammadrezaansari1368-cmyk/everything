@@ -1,5 +1,5 @@
 ---
-description: everything - one all-in-one command that runs the full workflow and auto-invokes bundled skills
+description: everything - single N3S command (Need, Navigate, Narrow, Solve); loads skills just-in-time
 argument-hint: <task>
 ---
-Load the `everything` skill and run it end to end for this task, invoking bundled skills automatically at every stage: $ARGUMENTS
+Load only the `everything` skill and run its N3S loop for this task. Load other skills one at a time, only when the current step needs them: $ARGUMENTS
