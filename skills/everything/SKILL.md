@@ -42,6 +42,7 @@ Paths: `skills/<source>/<name>/SKILL.md` (locally: `~/.claude/skills/<name>`). P
 **Need/ideas:** brainstorming — vague goal or design choice · idea-refine, interview-me — requirements unclear
 **Plan:** writing-plans — multi-step work · spec-driven-development — needs a spec · planning-and-task-breakdown — large scope · executing-plans — plan exists · constraint-driven-development — hard constraints
 **Navigate code:** graphify — unknown structure/behavior, reverse engineering · investigate-first, caveman-explore — explore before change · source-driven-development — must cite source/docs · context-engineering — context getting large
+**API reverse engineering:** reverse-api-engineer — turn a site's private HTTP API into a typed client (rae CLI); skip if an official API/SDK exists
 **Build:** test-driven-development (alt addy-test-driven-development) — writing code with testable behavior · incremental-implementation, surgical-patch — small change · subagent-driven-development, dispatching-parallel-agents, cavecrew — independent parallel tasks · using-git-worktrees — isolate branch work
 **UI:** ui-ux-pro-max — any UI/UX decision · frontend-design — visual polish · frontend-ui-engineering — component code · web-artifacts-builder — single-file web artifact
 **Debug:** systematic-debugging — any failure/unexpected result · debugging-and-error-recovery — recovery steps
