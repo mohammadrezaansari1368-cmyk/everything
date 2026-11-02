@@ -26,6 +26,9 @@ A single repo merging all agent skills, driven by **one command**: `everything <
 | Browser testing | anthropics/webapp-testing | addyosmani/browser-testing-with-devtools |
 | Refactor | — | addyosmani/code-simplification, caveman/safe-refactor |
 | Migration | — | addyosmani/deprecation-and-migration, caveman/migration |
+| TDD / review / security (ECC) | test-driven-development, requesting-code-review, security-and-hardening | `ecc/` reference copies only — not a second router entry. See [ecc/README.md](ecc/README.md) |
+| Node.js / TypeScript | — | `ecc/skills/typescript-patterns`, `ecc/skills/backend-patterns`, `ecc/rules/typescript` |
+| npm supply chain | — | `ecc/docs/` (guidance only; no scanner) |
 
 ## Index / فهرست (375 skills)
 | Skill | Source | URL | License | Purpose |

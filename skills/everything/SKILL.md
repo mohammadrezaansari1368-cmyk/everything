@@ -48,6 +48,7 @@ Paths: `skills/<source>/<name>/SKILL.md` (locally: `~/.claude/skills/<name>`). P
 **Debug:** systematic-debugging — any failure/unexpected result · debugging-and-error-recovery — recovery steps
 **Test:** webapp-testing — drive web app with Playwright · browser-testing-with-devtools — DevTools inspection
 **Security/DB/perf:** security-and-hardening — auth, secrets, input handling · performance-optimization — slow paths, DB queries · observability-and-instrumentation — logs/metrics/tracing
+**Node/TypeScript (ECC reference, `ecc/skills/<name>/SKILL.md`):** typescript-patterns — strict TypeScript · backend-patterns — Node, Express, or Next.js API structure. ECC TDD, review, and security copies under `ecc/` overlap skills already listed; do not load those copies as a second skill. Do not load ECC hooks, scanners, or installers — they are not in this repo.
 **APIs/tools:** api-and-interface-design — API shape · mcp-builder — MCP server · claude-api — Claude API app · skill-creator, writing-skills — authoring skills
 **Refactor/migrate:** code-simplification, safe-refactor — refactor · deprecation-and-migration, migration — migrations
 **Review:** requesting-code-review — after a meaningful chunk · receiving-code-review — handling feedback · code-review-and-quality, caveman-review, doubt-driven-development — extra scrutiny
