@@ -8,6 +8,7 @@ A single repo merging all agent skills, driven by **one command**: `everything <
 - One command: `everything <task>`. It is an **N3S** orchestrator (Need, Navigate, Narrow, Solve): classify the need, load only the minimum skill for the current step (full SKILL.md just-in-time from a compact index), narrow context, solve and verify. No skill is loaded globally; karpathy/caveman are lightweight defaults only. Target ~70% less context (a target, not a guarantee).
 - Full spec / مشخصات کامل: [docs/N3S.md](docs/N3S.md)
 - Files: `skills/everything/SKILL.md`, `commands/everything.md`.
+- Navigate (N2) uses the category index in [`skills/everything/SKILL.md`](skills/everything/SKILL.md), including Ruflo and ECC. Full name/purpose catalog: the Index below.
 - Install: copy `skills/<source>/<skill>` into `~/.claude/skills/` (or `~/.codex/skills/`), and `commands/everything.md` into `~/.claude/commands/` (Codex: `~/.codex/prompts/`).
 - Layout: `skills/<source>/<skill>/`; each source folder keeps upstream LICENSE/NOTICE.
 
