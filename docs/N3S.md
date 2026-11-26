@@ -151,6 +151,8 @@ For each step, ask:
 
 Load that capability, perform the action, retain the useful result, and continue.
 
+The compact routing index lives in `skills/everything/SKILL.md`. It lists when to load skills from each collection (superpowers, addyosmani, anthropics, caveman, graphify, karpathy, ui-ux-pro-max, reverse-api-engineer, ruflo, and ecc). The README Index is the full name/purpose catalog. During Navigate, pick the fewest skills (usually one) from that index for the current step only.
+
 ---
 
 ## Context and Token Efficiency

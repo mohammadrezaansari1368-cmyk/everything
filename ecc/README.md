@@ -16,6 +16,8 @@ Each copied file was read before it was added. Shell, network, installer, hook, 
 
 This repository already routes TDD, code review, and security through superpowers, addyosmani, and caveman skills. Those stay the primary skills. The ECC copies are kept under `ecc/` so the MIT text and attribution stay intact. They are not a second entry in the N3S router for the same job.
 
+The full upstream skill collection (328 skills) now lives at `skills/ecc/` and is indexed like other collections. This `ecc/` directory remains the curated, sanitized markdown subset from that earlier pass.
+
 Node.js and TypeScript patterns were not already in the index, so `skills/everything` may load `ecc/skills/typescript-patterns` or `ecc/skills/backend-patterns` when that is the step. npm supply-chain guidance had no existing doc here.
 
 ## Files taken
